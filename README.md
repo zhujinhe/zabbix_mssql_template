@@ -36,6 +36,8 @@ This template monitors SQL Server databases status, jobs status, server performa
 * To use ODBC, install unixODBC and freeTDS.
   
   Sample config ODBC:
+
+  note: should modified the path of *.so and tds version according to your environment.
   
   ```shell
   /etc/odbcinst.ini
@@ -54,14 +56,24 @@ This template monitors SQL Server databases status, jobs status, server performa
   [1c_base]
     host = 10.1.0.1
     port = 1433
+	tds version = YOUR TDS VERSION
   ```
   
 * And configure SQL Server to access data for ODBC user [zab]:
   ```sql
-  CREATE LOGIN [zab] WITH PASSWORD=N'****', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english],     CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+  CREATE LOGIN [zab] WITH PASSWORD=N'****', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
   
   GRANT VIEW SERVER STATE to [zab]
   GRANT VIEW ANY DEFINITION TO [zab]
   ```
   
   And create user mapping to read data from master and msdb.
+
+* Additional resources
+
+  [Freetds Official site](http://www.freetds.org/)
+
+  [Choosing a TDS protocol version:](http://www.freetds.org/userguide/choosingtdsprotocol.htm#TAB.PROTOCOL.BY.PRODUCT)
+
+  [FreeTDS Quick Start:](http://blog.mattwoodward.com/2012/08/freetds-quick-start.html)
+  
